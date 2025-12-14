@@ -15,14 +15,14 @@ use members::student::student;
 use members::teacher::teacher;
 
 fn main() {
-    println!(
-        "{}{}{}",
-        "==================".green().bold(),
-        "Welcome".cyan().bold(),
-        "==================".green().bold()
-    );
     loop {
         clear_terminal_screen();
+        println!(
+            "{}{}{}",
+            "==================".green().bold(),
+            "Welcome".cyan().bold(),
+            "==================".green().bold()
+        );
         println!(
             "{}{}{}",
             "========".green().bold(),
