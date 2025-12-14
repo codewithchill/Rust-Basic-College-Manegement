@@ -7,7 +7,7 @@ pub fn student(_filename: &str) {
         clear_terminal_screen();
         println!(
             "{}{}{}",
-            "===============:".green().bold(),
+            "===============".green().bold(),
             "Student Management Solution".cyan().bold().underline(),
             "===============".green().bold()
         );
