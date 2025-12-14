@@ -1,4 +1,5 @@
 mod members;
+mod constants;
 
 use colored::Colorize;
 use std::{
@@ -9,10 +10,7 @@ use std::{
 use members::student::student;
 use members::staff::staff;
 use members::teacher::teacher;
-
-const ERROR: &str = "ERROR";
-// const SUCCESS: &str = "SUCCESS";
-
+use constants::ERROR;
 fn main() {
     let mut choice: u8 = 0;
     let mut user_input: String = "".to_string();
@@ -61,9 +59,11 @@ fn main() {
         }
         while !is_valid_input {
             print!(
-                "{}[Enter {} for yes or any other to exit]: ",
+                "{}[Enter {} for {} or {} to exit]: ",
                 "Do you want to continue with the main menu?".bold(),
-                "1".green().bold()
+                "1".green().bold(),
+                "yes".green().bold(),
+                "any other".red().bold()
             );
             io::stdout().flush().expect("Failed to flush the output");
 
