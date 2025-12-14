@@ -1,5 +1,6 @@
-mod members;
 mod constants;
+mod members;
+mod clear_console;
 
 use colored::Colorize;
 use std::{
@@ -7,14 +8,13 @@ use std::{
     u8,
 };
 
-use members::student::student;
-use members::staff::staff;
-use members::teacher::teacher;
 use constants::ERROR;
+use clear_console::clear_terminal_screen;
+use members::staff::staff;
+use members::student::student;
+use members::teacher::teacher;
+
 fn main() {
-    let mut choice: u8 = 0;
-    let mut user_input: String = "".to_string();
-    let mut is_valid_input: bool = false;
     println!(
         "{}{}{}",
         "==================".green().bold(),
@@ -22,6 +22,7 @@ fn main() {
         "==================".green().bold()
     );
     loop {
+        clear_terminal_screen();
         println!(
             "{}{}{}",
             "========".green().bold(),
@@ -32,6 +33,9 @@ fn main() {
         println!("\t1. Manage Student Record (Press 1):");
         println!("\t2. Manage Teachers Record (Press 2):");
         println!("\t3. Manage Staff Record (Press 3):");
+        let mut choice: u8 = 0;
+        let mut user_input: String = "".to_string();
+        let mut is_valid_input: bool = false;
         while !is_valid_input {
             print!("Enter a value: ");
             io::stdout().flush().expect("Failed to flush the output");
@@ -55,12 +59,15 @@ fn main() {
             1 => student("data/student.csv"),
             2 => teacher("data/teacher.csv"),
             3 => staff("data/staff.csv"),
-            _ => println!("{}: Enter a valid choice between 1 to 3!", ERROR.red().bold())
+            _ => println!(
+                "{}: Enter a valid choice between 1 to 3!",
+                ERROR.red().bold()
+            ),
         }
         while !is_valid_input {
             print!(
-                "{}[Enter {} for {} or {} to exit]: ",
-                "Do you want to continue with the main menu?".bold(),
+                "{}\n\t[Enter {} for {} or {} to exit]: ",
+                "Do you want to continue with the main menu?".purple().bold(),
                 "1".green().bold(),
                 "yes".green().bold(),
                 "any other".red().bold()
@@ -83,7 +90,6 @@ fn main() {
                 }
             }
         }
-        is_valid_input = false;
         if choice != 1 {
             break;
         }
