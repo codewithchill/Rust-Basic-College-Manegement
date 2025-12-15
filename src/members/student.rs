@@ -1,6 +1,7 @@
 use crate::{clear_console::clear_terminal_screen, constants::ERROR};
 use colored::Colorize;
 use std::io::{self, Write};
+use super::department::DepartmentType;
 
 pub fn student(filename: &str) {
     loop {
@@ -44,7 +45,10 @@ pub fn student(filename: &str) {
             3 => record_view(filename),   //* record_view */
             4 => record_update(filename), //* record_update */
             1 => record_delete(filename), //* record_delete */
-            _ => println!("{}: Enter a valid option between 1 to 4!", ERROR.red().bold()),
+            _ => println!(
+                "{}: Enter a valid option between 1 to 4!",
+                ERROR.red().bold()
+            ),
         }
         while !is_valid_input {
             print!(
@@ -82,6 +86,17 @@ pub fn student(filename: &str) {
         }
     }
 }
+
+struct Student {
+    id: u64,
+    name: String,
+	dept: DepartmentType,
+	roll_no: u64,
+	year: u8,
+	cgpa: f32
+}
+// const total_student_fields:u8 = 6; //* will be for counting  */
+
 
 fn record_add(filename: &str) {
     println!("File name is: {}", filename);
