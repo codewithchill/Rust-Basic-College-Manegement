@@ -1,10 +1,18 @@
 pub enum DepartmentType {
-  CSE,
-	ECE,
-	BCA,
-	BCS,
-	IT,
-	ME,
-	CE,
-	AE
+    CSE,
+    BCA,
+    BCS,
+    IT,
+    ME,
+    CE,
+    AE,
 }
+pub const DEPARTMENT_NAMES: [&str; 7] = [
+    "Comp Sci. and Engg.",
+    "Comp Appl.",
+    "Comp Sci",
+    "Infomation Tech",
+    "Mechanical Engg",
+    "Chemical Engg.",
+    "Aerospace Engg.",
+];

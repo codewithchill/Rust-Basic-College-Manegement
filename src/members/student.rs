@@ -1,7 +1,10 @@
-use crate::{clear_console::clear_terminal_screen, constants::ERROR};
+use super::department::DepartmentType;
+use crate::{
+    clear_console::clear_terminal_screen,
+    constants::{ERROR, MAX_RECORD_PER_SESSION},
+};
 use colored::Colorize;
 use std::io::{self, Write};
-use super::department::DepartmentType;
 
 pub fn student(filename: &str) {
     loop {
@@ -90,16 +93,51 @@ pub fn student(filename: &str) {
 struct Student {
     id: u64,
     name: String,
-	dept: DepartmentType,
-	roll_no: u64,
-	year: u8,
-	cgpa: f32
+    dept: DepartmentType,
+    roll_no: u64,
+    year: u8,
+    cgpa: f32,
 }
 // const total_student_fields:u8 = 6; //* will be for counting  */
-
-
-fn record_add(filename: &str) {
-    println!("File name is: {}", filename);
+fn record_add(_filename: &str) {
+    loop {
+        println!(
+            "How many student's record do you want to put? [Max = {} per session]",
+            MAX_RECORD_PER_SESSION.to_string().bold().underline().cyan()
+        );
+        let mut student_record_num: u8 = 0;
+        let mut user_input: String = "".to_string();
+        let mut is_valid_input: bool = false;
+        while !is_valid_input {
+            print!("Enter a number: ");
+            io::stdout().flush().expect("Error in flushing to stdout");
+            user_input.clear();
+            io::stdin()
+                .read_line(&mut user_input)
+                .expect("Error in input!");
+            match user_input.trim().parse::<u8>() {
+                Ok(value) => {
+                    is_valid_input = true;
+                    student_record_num = value;
+                }
+                Err(_) => {
+                    is_valid_input = false;
+                    println!("{}: Enter a valid number input!", ERROR.red().bold());
+                }
+            }
+            if (student_record_num > 100) || (student_record_num < 1) {
+                println!(
+                    "{}: Enter a valid number between 1 to 100!",
+                    ERROR.red().bold()
+                );
+                is_valid_input = false;
+            }
+        }
+        println!("Entered value is: {}", student_record_num); //* Debug
+        // is_valid_input = false;
+        // let mut student_details: [Student; student_record_num];
+        // while !is_valid_input {}
+    }
 }
 fn record_view(filename: &str) {
     println!("File name is: {}", filename);
