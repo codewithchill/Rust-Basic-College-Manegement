@@ -1,4 +1,4 @@
-// use super::department::DepartmentType;
+use super::department::DepartmentType;
 use crate::{
     clear_console::clear_terminal_screen,
     constants::{ERROR, MAX_RECORD_PER_SESSION},
@@ -92,15 +92,15 @@ pub fn student(filename: &str) {
     }
 }
 
-// struct Student {
-//     id: u64,
-//     name: String,
-//     dept: DepartmentType,
-//     roll_no: u64,
-//     year: u8,
-//     cgpa: f32,
-// }
-// const total_student_fields:u8 = 6; //* will be for counting  */
+struct Student {
+    id: u64,
+    name: String,
+    dept: DepartmentType,
+    roll_no: u64,
+    year: u8,
+    cgpa: f32,
+}
+// const total_student_fields:u8 = 6; //* will be later used for counting  */
 fn record_add(_filename: &str) {
     loop {
         println!(
@@ -110,7 +110,7 @@ fn record_add(_filename: &str) {
         let student_record_num: u8 = user_input::input_u8(None, 1, 100);
         // let mut user_input: String = "".to_string();
         // let mut is_valid_input: bool = false;
-        println!("Entered value is: {}", student_record_num); //* Debug
+        // println!("Entered value is: {}", student_record_num); //* Debug
         // let mut student_details: Vec<Student> = Vec::with_capacity(student_record_num as usize);
         // while !is_valid_input {}
         // is_valid_input = false;

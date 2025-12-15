@@ -14,6 +14,7 @@ use constants::ERROR;
 use members::staff::staff;
 use members::student::student;
 use members::teacher::teacher;
+use crate::utils::user_input;
 
 fn main() {
     loop {
@@ -34,30 +35,7 @@ fn main() {
         println!("\t1. Manage Student Record (Press 1):");
         println!("\t2. Manage Teachers Record (Press 2):");
         println!("\t3. Manage Staff Record (Press 3):");
-        let mut choice: u8 = 0;
-        let mut user_input: String = "".to_string();
-        let mut is_valid_input: bool = false;
-        //* Take the input until a number is correctly read from the standard input */
-        while !is_valid_input {
-            print!("Enter a value: ");
-            io::stdout().flush().expect("Failed to flush the output");
-            user_input.clear();
-            io::stdin()
-                .read_line(&mut user_input)
-                .expect("Failed to take Input");
-            match user_input.trim().parse::<u8>() {
-                Ok(value) => {
-                    choice = value;
-                    is_valid_input = true;
-                }
-                Err(_) => {
-                    println!("{}: Enter a valid number!", ERROR.red().bold());
-                    is_valid_input = false;
-                }
-            }
-        }
-        //* Reset the value for further input validation checks */
-        is_valid_input = false;
+        let mut choice: u8 = user_input::input_u8(None, 1, 4);
         match choice {
             1 => student("data/student.csv"),
             2 => teacher("data/teacher.csv"),
@@ -67,6 +45,8 @@ fn main() {
                 ERROR.red().bold()
             ),
         }
+        let mut user_input: String = "".to_string();
+        let mut is_valid_input: bool = false;
         /*
          * Prompt the users for exit option,
          * if read and such input found than
