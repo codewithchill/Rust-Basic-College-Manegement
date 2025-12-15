@@ -1,6 +1,7 @@
 mod clear_console;
 mod constants;
 mod members;
+mod utils;
 
 use colored::Colorize;
 use std::{
