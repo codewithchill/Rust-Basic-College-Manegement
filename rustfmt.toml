@@ -1,0 +1,17 @@
+# rustfmt.toml (Stable Channel Compatible)
+
+# 1. Edition
+edition = "2021"
+
+# 2. Line Width
+max_width = 100
+
+# 3. Indentation
+tab_spaces = 4
+hard_tabs = false
+
+# 4. Newline style (Optional, keeps Git happy across Windows/Linux)
+newline_style = "Unix"
+
+# NOTE: Advanced import sorting and comment wrapping 
+# are removed as they require Nightly Rust.

@@ -1,6 +1,6 @@
+mod clear_console;
 mod constants;
 mod members;
-mod clear_console;
 
 use colored::Colorize;
 use std::{
@@ -8,21 +8,21 @@ use std::{
     u8,
 };
 
+// use clear_console::clear_terminal_screen;
 use constants::ERROR;
-use clear_console::clear_terminal_screen;
 use members::staff::staff;
 use members::student::student;
 use members::teacher::teacher;
 
 fn main() {
-    println!(
-        "{}{}{}",
-        "==================".green().bold(),
-        "Welcome".cyan().bold(),
-        "==================".green().bold()
-    );
     loop {
-        clear_terminal_screen();
+        // clear_terminal_screen(); //* Clears the console for fresh view */
+        println!(
+            "{}{}{}",
+            "==================".green().bold(),
+            "Welcome".cyan().bold(),
+            "==================".green().bold()
+        );
         println!(
             "{}{}{}",
             "========".green().bold(),
@@ -36,6 +36,7 @@ fn main() {
         let mut choice: u8 = 0;
         let mut user_input: String = "".to_string();
         let mut is_valid_input: bool = false;
+        //* Take the input until a number is correctly read from the standard input */
         while !is_valid_input {
             print!("Enter a value: ");
             io::stdout().flush().expect("Failed to flush the output");
@@ -54,6 +55,7 @@ fn main() {
                 }
             }
         }
+        //* Reset the value for further input validation checks */
         is_valid_input = false;
         match choice {
             1 => student("data/student.csv"),
@@ -64,10 +66,17 @@ fn main() {
                 ERROR.red().bold()
             ),
         }
+        /*
+         * Prompt the users for exit option,
+         * if read and such input found than
+         * exit successfully otherwise restart
+         */
         while !is_valid_input {
             print!(
                 "{}\n\t[Enter {} for {} or {} to exit]: ",
-                "Do you want to continue with the main menu?".purple().bold(),
+                "Do you want to continue with the main menu?"
+                    .purple()
+                    .bold(),
                 "1".green().bold(),
                 "yes".green().bold(),
                 "any other".red().bold()

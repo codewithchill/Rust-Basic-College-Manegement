@@ -2,7 +2,7 @@ use crate::{clear_console::clear_terminal_screen, constants::ERROR};
 use colored::Colorize;
 use std::io::{self, Write};
 
-pub fn student(_filename: &str) {
+pub fn student(filename: &str) {
     loop {
         clear_terminal_screen();
         println!(
@@ -19,11 +19,33 @@ pub fn student(_filename: &str) {
         let mut is_valid_input: bool = false;
         let mut user_input: String = "".to_string();
         let mut choice: u8 = 0;
-        // while !is_valid_input {
 
-        // }
-        // is_valid_input = false;
-
+        while !is_valid_input {
+            print!("Enter your choice: ");
+            io::stdout().flush().expect("Failed to flush the output");
+            user_input.clear();
+            io::stdin()
+                .read_line(&mut user_input)
+                .expect("Failed to get input");
+            match user_input.trim().parse::<u8>() {
+                Ok(value) => {
+                    choice = value;
+                    is_valid_input = true;
+                }
+                Err(_) => {
+                    println!("{}: Enter a valid number!", ERROR.red().bold());
+                    is_valid_input = false;
+                }
+            }
+        }
+        is_valid_input = false;
+        match choice {
+            2 => record_add(filename),    //* record_add */
+            3 => record_view(filename),   //* record_view */
+            4 => record_update(filename), //* record_update */
+            1 => record_delete(filename), //* record_delete */
+            _ => println!("{}: Enter a valid option between 1 to 4!", ERROR.red().bold()),
+        }
         while !is_valid_input {
             print!(
                 "{}\n\t(Enter {} to {} or press any key to go back!): ",
@@ -59,4 +81,17 @@ pub fn student(_filename: &str) {
             return;
         }
     }
+}
+
+fn record_add(filename: &str) {
+    println!("File name is: {}", filename);
+}
+fn record_view(filename: &str) {
+    println!("File name is: {}", filename);
+}
+fn record_delete(filename: &str) {
+    println!("File name is: {}", filename);
+}
+fn record_update(filename: &str) {
+    println!("File name is: {}", filename);
 }
