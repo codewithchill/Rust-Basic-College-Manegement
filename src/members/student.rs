@@ -1,3 +1,4 @@
+//* Module Dependencies */
 use super::department::DepartmentType;
 use crate::{
     clear_console::clear_terminal_screen,
@@ -5,7 +6,19 @@ use crate::{
     utils::user_input,
 };
 use colored::Colorize;
-use std::io::{self, Write};
+use std::{
+    io::{self, Write}
+};
+
+//* Student Blueprint */
+struct Student {
+    id: u32,
+    name: String,
+    dept: DepartmentType,
+    roll_no: u32,
+    year: u8,
+    cgpa: f32,
+}
 
 pub fn student(filename: &str) {
     loop {
@@ -92,14 +105,6 @@ pub fn student(filename: &str) {
     }
 }
 
-struct Student {
-    id: u64,
-    name: String,
-    dept: DepartmentType,
-    roll_no: u64,
-    year: u8,
-    cgpa: f32,
-}
 // const total_student_fields:u8 = 6; //* will be later used for counting  */
 fn record_add(_filename: &str) {
     loop {
@@ -108,32 +113,45 @@ fn record_add(_filename: &str) {
             MAX_RECORD_PER_SESSION.to_string().bold().underline().cyan()
         );
         let student_record_num: u8 = user_input::input_u8(None, 1, 100);
-        // let mut user_input: String = "".to_string();
-        // let mut is_valid_input: bool = false;
-        // println!("Entered value is: {}", student_record_num); //* Debug
         // let mut student_details: Vec<Student> = Vec::with_capacity(student_record_num as usize);
-        // while !is_valid_input {}
-        // is_valid_input = false;
-        let mut _exit_option: u8 = 0;
+
+        for i in 1..=student_record_num {
+            let id_statement = format!("Enter the ID of your student {}: ", i);
+            let id = user_input::input_u32(Some(id_statement.as_str()), 0, u32::MAX);
+            let name_statement = format!("Enter the name of your student with ID:{}: ", id);
+            let name = user_input::input_str(Some(name_statement.as_str()), 5, 24);
+            // let mut student_temporary: Student;
+            // student_details.push(student_temporary);
+        }
+
         println!(
-            "Do you want to exit? [Press {} for {}]",
+            "Do you want to exit? [Enter {} for {} or {} for {}]",
             "1".green().bold(),
-            "yes".green().bold()
+            "YES".green().bold(),
+            "2".red().bold(),
+            "NO".red().bold(),
         );
-        // while !is_valid_input {}
-        // exit_option = input_u8(None, 0, upper_limit)
-        if _exit_option == 1 {
+        let exit_option: u8 = user_input::input_u8(None, 1, 2);
+        if exit_option == 1 {
             break;
         }
     }
-    return;
 }
 fn record_view(filename: &str) {
-    println!("File name is: {}", filename.cyan().bold().underline().italic());
+    println!(
+        "File name is: {}",
+        filename.cyan().bold().underline().italic()
+    );
 }
 fn record_delete(filename: &str) {
-    println!("File name is: {}", filename.cyan().bold().underline().italic());
+    println!(
+        "File name is: {}",
+        filename.cyan().bold().underline().italic()
+    );
 }
 fn record_update(filename: &str) {
-    println!("File name is: {}", filename.cyan().bold().underline().italic());
+    println!(
+        "File name is: {}",
+        filename.cyan().bold().underline().italic()
+    );
 }

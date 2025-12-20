@@ -10,11 +10,11 @@ use std::{
 };
 
 // use clear_console::clear_terminal_screen;
+use crate::utils::user_input;
 use constants::ERROR;
 use members::staff::staff;
 use members::student::student;
 use members::teacher::teacher;
-use crate::utils::user_input;
 
 fn main() {
     loop {
